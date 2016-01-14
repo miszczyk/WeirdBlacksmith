@@ -1,0 +1,104 @@
+﻿@model IEnumerable<WeirdBlacksmith.Models.WeaponsModels>
+
+@{
+    ViewBag.Title = "Collection";
+}
+
+<header class="intro">
+    <div class="intro-body">
+
+        <div class="centered">
+
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Rarity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MinDamage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MaxDamage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ImageUrl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Added)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    var rare = item.Rarity;
+                    var finalColor = "";
+                    switch (rare)
+                    {
+                        case "Normal":
+                            finalColor = "rgba(69, 139, 0, 0.4)";
+                            break;
+                        case "Magic":
+                            finalColor = "rgba(1, 152, 225, 0.4)";
+                            break;
+                        case "Rare":
+                            finalColor = "rgba(255, 204, 17, 0.4)";
+                            break;
+                        case "Epic":
+                            finalColor = "rgba(139, 105, 20, 0.4)";
+                            break;
+                        case "Legendary":
+                            finalColor = "rgba(153, 50, 204, 0.4)";
+                            break;
+                        default:
+                            break;
+
+                    }
+                    <tr style="background-color:@finalColor;">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rarity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td id="description">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            <text style="color:red">@Html.DisplayFor(modelItem => item.MinDamage)</text>
+</td>
+                        <td>
+                            <text style="color:green">@Html.DisplayFor(modelItem => item.MaxDamage)</text>
+                        </td>
+                        <td>
+                            <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="WeaponImage" style="width:60px;height:60px;"/>         
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Added)
+                        </td>
+                    </tr>
+                                                
+                    }
+
+            </table>
+
+        </div>
+        <div>
+            @{
+                var last = Model.Last();
+                    @Html.Partial("_WeaponTile", last)
+            }
+
+
+
+        </div>
+        </div>
+        </header>
+
+
+

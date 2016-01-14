@@ -1,0 +1,42 @@
+﻿@model WeirdBlacksmith.Models.WeaponsModels
+<br />
+<br />
+<h1>Most recently added weapon</h1>
+<div class="weapons-tile">
+    <br />
+    <h5 class="title4">
+    @{
+        var rare = Model.Rarity;
+        var finalColor = "";
+        switch (rare)
+        {
+            case "Normal":
+                finalColor = "#458B00";
+                break;
+            case "Magic":
+                finalColor = "#0198E1";
+                break;
+            case "Rare":
+                finalColor = "#FFCC11";
+                break;
+            case "Epic":
+                finalColor = "#8B6914";
+                break;
+            case "Legendary":
+                finalColor = "#9932CC";
+                break;
+            default:
+                break;
+
+        }
+        <font color="@finalColor">
+    @Model.Name
+        </font>
+    }
+     </h5>
+    <img src="@Model.ImageUrl" alt="WeaponImage" style="width:160px;height:180px;" />
+    <p class="description-last"><i><b><font color="@finalColor"><font size=1><b>@Model.Description</b></font></font></b></i></p>
+    
+
+</div>
+<p class="blabla">@Model.Added.ToString("g")</p>

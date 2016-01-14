@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="AspNetUsers" EntityType="Model1.Store.AspNetUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TitleModelsSet" EntityType="Model1.Store.TitleModelsSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WeaponsModelsSet" EntityType="Model1.Store.WeaponsModelsSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="AspNetUsersTitleModels" Association="Model1.Store.AspNetUsersTitleModels">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TitleModels" EntitySet="TitleModelsSet" />
+    </AssociationSet>
+    <AssociationSet Name="TitleModelsWeaponsModels" Association="Model1.Store.TitleModelsWeaponsModels">
+      <End Role="TitleModels" EntitySet="TitleModelsSet" />
+      <End Role="WeaponsModels" EntitySet="WeaponsModelsSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" Nullable="true" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="TitleModelsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OwnedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CurrentUserRole" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WeaponsCount" Type="int" Nullable="false" />
+    <Property Name="AspNetUsersId" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="WeaponsModelsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rarity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MinDamage" Type="int" Nullable="false" />
+    <Property Name="MaxDamage" Type="int" Nullable="false" />
+    <Property Name="ImageUrl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Added" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TitleModelsId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="AspNetUsersTitleModels">
+    <End Role="AspNetUsers" Type="Model1.Store.AspNetUsers" Multiplicity="1" />
+    <End Role="TitleModels" Type="Model1.Store.TitleModelsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TitleModels">
+        <PropertyRef Name="AspNetUsersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TitleModelsWeaponsModels">
+    <End Role="TitleModels" Type="Model1.Store.TitleModelsSet" Multiplicity="1" />
+    <End Role="WeaponsModels" Type="Model1.Store.WeaponsModelsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TitleModels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WeaponsModels">
+        <PropertyRef Name="TitleModelsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,80 @@
+﻿@model WeirdBlacksmith.Models.WeaponsModels
+
+@{
+    ViewBag.Title = "Forge";
+}
+<header class="forge">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="brand-heading">@ViewBag.Title</h1>
+                    <section id="loginForm">
+                        @using (Html.BeginForm("Forge", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <h2>Tell Blacksmith how your weapon should look like !</h2>
+                            <hr />
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Rarity, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.Rarity, new List<SelectListItem> {
+                       new SelectListItem { Value = "Normal" , Text = "Normal" },
+                       new SelectListItem { Value = "Magic" , Text = "Magic" },
+                       new SelectListItem { Value = "Rare" , Text = "Rare" },
+                       new SelectListItem { Value = "Epic" , Text = "Epic" },
+                       new SelectListItem { Value = "Legendary" , Text = "Legendary" },
+                    }, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, new { @class = "col-md-4 control-label" })
+                                <div class="col-lg-4">
+                                    @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @style = "width:500px;" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MinDamage, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.MinDamage, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MaxDamage, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.MaxDamage, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImageUrl, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.ImageUrl, new { @class = "form-control" })
+                                </div>
+                            </div>
+                                @Html.Hidden("Added",DateTime.Now)
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-default" value="Let Blacksmith start forging" />
+                                </div>
+                            </div>
+                        }
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+
+
+
+

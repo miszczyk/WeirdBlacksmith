@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "NotLoggedIn";
+}
+
+<header class="forge">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2><font color="#CC3232">WARNING</font></h2>
+                    <section id="loginForm">
+
+                        <h2><font color="#CC3232"> You do not have permission to perform this action</font></h2>
+
+                        <ul class="list-inline banner-social-buttons">
+                            <li>
+                                <a href="@Url.Action("Index", "Home")" class="btn btn-default btn-lg"><i class="fa fa-shield fa-fw"></i> <span class="network-name">Redirect to home</span></a>
+                            </li>
+
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+

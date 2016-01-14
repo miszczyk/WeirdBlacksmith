@@ -1,0 +1,54 @@
+﻿@model WeirdBlacksmith.Models.TitleModels
+@{
+    ViewBag.Title = "AccountMenu";
+}
+
+<header class="intro">
+    
+    <div class="intro-body">
+        <div class="container">
+            
+            
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <section id="loginForm">
+
+
+                        <p class="text-success">@ViewBag.StatusMessage</p>
+                        <div style="margin-top:200px">
+                            
+                            <div style="display:block">
+                                <h1>Account info</h1>
+                                <hr />
+                                <h1>Your title </h1>
+                                <h3><font color="#a349a4"><b>@Html.DisplayFor(model => model.Title)</b></font></h3>
+                                <h1>Your role </h1>
+                                <h3><font color="#CC3232"><b>@Html.DisplayFor(model => model.CurrentUserRole)</b></font></h3>
+                                <h1>Current weapons count </h1>
+                                <h2><font color="#3465a4"><b>@Html.DisplayFor(model => model.WeaponsCount)</b></font></h2>                          
+                                <hr />
+                                <h1>See Your Collection </h1>
+                                <h3><font color="#1d9b6c"><b><a href="@Url.Action("MyWeapons", "Home")" id="forge"><i class="fa fa-bar-chart"></i>  MY COLLLECTION </a></b></font></h3>
+                                <br />
+                                <h1>Change your password </h1>
+                                <h3><font color="#1d9b6c"><b><a href="@Url.Action("ChangePassword", "Manage")" id="forge"><i class="fa fa-cogs"></i> CHANGE MY PASSWORD </a></b></font></h3>
+                                <hr />
+                                <h1>Administrative tools </h1>
+                                <h3><font color="#1d9b6c"><b><a href="@Url.Action("Managament", "Home")" id="forge"><i class="fa fa-calendar-o"></i>  Manage weapons base </a></b></font></h3>
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetUsers" EntityType="Model1.AspNetUsers" />
+    <EntitySet Name="TitleModelsSet" EntityType="Model1.TitleModels" />
+    <AssociationSet Name="AspNetUsersTitleModels" Association="Model1.AspNetUsersTitleModels">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TitleModels" EntitySet="TitleModelsSet" />
+    </AssociationSet>
+    <EntitySet Name="WeaponsModelsSet" EntityType="Model1.WeaponsModels" />
+    <AssociationSet Name="TitleModelsWeaponsModels" Association="Model1.TitleModelsWeaponsModels">
+      <End Role="TitleModels" EntitySet="TitleModelsSet" />
+      <End Role="WeaponsModels" EntitySet="WeaponsModelsSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TitleModels" Relationship="Model1.AspNetUsersTitleModels" FromRole="AspNetUsers" ToRole="TitleModels" />
+  </EntityType>
+  <EntityType Name="TitleModels">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OwnedBy" Type="String" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" />
+    <Property Name="CurrentUserRole" Type="String" Nullable="false" />
+    <Property Name="WeaponsCount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Model1.AspNetUsersTitleModels" FromRole="TitleModels" ToRole="AspNetUsers" />
+    <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WeaponsModels" Relationship="Model1.TitleModelsWeaponsModels" FromRole="TitleModels" ToRole="WeaponsModels" />
+  </EntityType>
+  <Association Name="AspNetUsersTitleModels">
+    <End Type="Model1.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="Model1.TitleModels" Role="TitleModels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TitleModels">
+        <PropertyRef Name="AspNetUsersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="WeaponsModels">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rarity" Type="String" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="MinDamage" Type="Int32" Nullable="false" />
+    <Property Name="MaxDamage" Type="Int32" Nullable="false" />
+    <Property Name="ImageUrl" Type="String" Nullable="false" />
+    <Property Name="Added" Type="String" Nullable="false" />
+    <NavigationProperty Name="TitleModels" Relationship="Model1.TitleModelsWeaponsModels" FromRole="WeaponsModels" ToRole="TitleModels" />
+    <Property Name="TitleModelsId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="TitleModelsWeaponsModels">
+    <End Type="Model1.TitleModels" Role="TitleModels" Multiplicity="1" />
+    <End Type="Model1.WeaponsModels" Role="WeaponsModels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TitleModels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WeaponsModels">
+        <PropertyRef Name="TitleModelsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

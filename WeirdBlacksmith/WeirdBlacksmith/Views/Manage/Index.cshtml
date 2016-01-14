@@ -1,0 +1,50 @@
+﻿@model WeirdBlacksmith.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+<header class="intro">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="brand-heading">@ViewBag.Title</h1>
+                    <section id="loginForm">
+
+
+                        <p class="text-success">@ViewBag.StatusMessage</p>
+                        <div>
+                            <h4>See your accounts settings</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>Password:</dt>
+                                <dd>
+                                    [
+                                    @if (Model.HasPassword)
+            {
+                                        @Html.ActionLink("Change your password", "ChangePassword")
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Create", "SetPassword")
+                                    }
+                                    ]
+                                </dd>
+                                </dl>
+
+                            <dl class="dl-horizontal">
+                                <dt>Password:</dt>
+                                <dd>
+                                    
+                                </dd>
+                            </dl>
+
+
+                                
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
